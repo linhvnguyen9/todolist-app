@@ -1,11 +1,11 @@
 package com.linh.to_dolist
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import java.util.*
 
 @Database(entities = [TodoEntry::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class TodoRoomDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
 
@@ -20,4 +20,13 @@ abstract class TodoRoomDatabase : RoomDatabase() {
             }
         }
     }
+}
+
+class Converters {
+    @TypeConverter
+    fun toCalendar(l: Long?): Calendar? =
+        if (l == null) null else Calendar.getInstance().apply { timeInMillis = l }
+
+    @TypeConverter
+    fun fromCalendar(c: Calendar?): Long? = c?.time?.time
 }
