@@ -3,11 +3,16 @@ package com.linh.to_dolist
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import java.util.*
 
 @Entity(tableName = "todo_table")
 data class TodoEntry(
-    @PrimaryKey(autoGenerate = true) val id: Int, var title: String,
+    var title: String,
     var description: String,
     @ColumnInfo(name = "due_date") var dueDate: Calendar
-)
+) {
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
+
+    override fun toString(): String = "title: $title, desc: $description, due: $dueDate"
+}
