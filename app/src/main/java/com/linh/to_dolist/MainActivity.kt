@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                     ) //TODO: Change to user defined date
 
                     Log.d("onActivityResult", dueDate.toString())
+                    Log.d("onActivityResult", entry.toString())
 
                     todoViewModel.insert(entry)
                 }

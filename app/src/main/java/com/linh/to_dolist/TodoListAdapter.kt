@@ -1,20 +1,25 @@
 package com.linh.to_dolist
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_todo.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TodoListAdapter(context: Context) : RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
+    private val TAG = TodoListAdapter::class.java.simpleName
+
     private val inflater = LayoutInflater.from(context)
     private var todoEntries = emptyList<TodoEntry>()
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title = itemView.todo_title
-        val description = itemView.todo_title
-        val dueDate = itemView.todo_title
+        val description = itemView.todo_description
+        val dueDate = itemView.todo_duedate
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -28,9 +33,12 @@ class TodoListAdapter(context: Context) : RecyclerView.Adapter<TodoListAdapter.T
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentEntry = todoEntries[position]
 
+        Log.d(TAG, currentEntry.toString())
+
         holder.title.text = currentEntry.title
         holder.description.text = currentEntry.description
-        holder.dueDate.text = currentEntry.dueDate.toString()
+        val date = currentEntry.dueDate
+        holder.dueDate.text = "${date.get(Calendar.DAY_OF_MONTH)} ${date.get(Calendar.MONTH) + 1} ${date.get(Calendar.YEAR)}"
     }
 
     internal fun setEntries(entry: List<TodoEntry>) {

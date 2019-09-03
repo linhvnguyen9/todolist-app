@@ -13,4 +13,6 @@ data class TodoEntry(
     @ColumnInfo(name = "due_date") var dueDate: Calendar
 ) {
     @PrimaryKey(autoGenerate = true) var id: Int = 0
+
+    override fun toString(): String = "title: $title, desc: $description, due: $dueDate"
 }
