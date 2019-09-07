@@ -5,36 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewTodoEntryActivity"
-    android:padding="16dp">
-
-    <EditText
-        android:id="@+id/edittext_new_todo_entry_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Title"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/textview_new_todo_entry_title"
-        app:layout_constraintTop_toBottomOf="@+id/textview_new_todo_entry_title" />
+    android:padding="@dimen/padding_new_todo_entry_layout">
 
     <TextView
         android:id="@+id/textview_new_todo_entry_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add a Todo entry"
-        android:textSize="30sp"
+        android:text="@string/new_todo_entry_text"
+        android:textSize="@dimen/textsize_new_todo_entry_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edittext_new_todo_entry_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_new_todo_entry_title_top"
+        android:ems="10"
+        android:hint="@string/new_todo_entry_title_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/textview_new_todo_entry_title"
+        app:layout_constraintTop_toBottomOf="@+id/textview_new_todo_entry_title" />
 
     <EditText
         android:id="@+id/edittext_new_todo_entry_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_new_todo_entry_description_top"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Description"
+        android:hint="@string/new_todo_entry_description_hint"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="@+id/edittext_new_todo_entry_title"
         app:layout_constraintTop_toBottomOf="@+id/edittext_new_todo_entry_title" />
@@ -43,9 +43,9 @@
         android:id="@+id/button_new_todo_entry_duedate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_new_todo_entry_duedate_button_top"
         android:onClick="showDatePicker"
-        android:text="Pick a due date"
+        android:text="@string/new_todo_entry_button_duedate_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_new_todo_entry_description" />
@@ -54,9 +54,9 @@
         android:id="@+id/button_new_todo_entry_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_new_todo_entry_submit_top"
         android:onClick="onSubmitClickListener"
-        android:text="Submit"
+        android:text="@string/new_todo_entry_button_submit_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_new_todo_entry_duedate" />
