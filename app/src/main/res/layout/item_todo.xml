@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="8dp"
-    android:padding="8dp"
-    app:cardCornerRadius="8dp">
+    android:layout_margin="@dimen/margin_todo_card_layout"
+    android:padding="@dimen/padding_todo_card_layout"
+    app:cardCornerRadius="@dimen/radius_todo_card">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
             android:id="@+id/todo_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="@dimen/textsize_todo_card_title"
             android:textStyle="bold"
             tools:text="Todo title" />
 
