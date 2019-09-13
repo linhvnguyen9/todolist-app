@@ -1,64 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NewTodoEntryActivity"
-    android:padding="@dimen/padding_new_todo_entry_layout">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textview_new_todo_entry_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_todo_entry_text"
-        android:textSize="@dimen/textsize_new_todo_entry_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <EditText
-        android:id="@+id/edittext_new_todo_entry_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_new_todo_entry_title_top"
-        android:ems="10"
-        android:hint="@string/new_todo_entry_title_hint"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/textview_new_todo_entry_title"
-        app:layout_constraintTop_toBottomOf="@+id/textview_new_todo_entry_title" />
+        <variable
+            name="viewModel"
+            type="com.linh.to_dolist.newtodoentry.NewTodoEntryViewModel" />
+    </data>
 
-    <EditText
-        android:id="@+id/edittext_new_todo_entry_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_new_todo_entry_description_top"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/new_todo_entry_description_hint"
-        android:inputType="textMultiLine"
-        app:layout_constraintStart_toStartOf="@+id/edittext_new_todo_entry_title"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_new_todo_entry_title" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_new_todo_entry_layout"
+        tools:context=".newtodoentry.NewTodoEntryActivity">
 
-    <Button
-        android:id="@+id/button_new_todo_entry_duedate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_new_todo_entry_duedate_button_top"
-        android:onClick="showDatePicker"
-        android:text="@string/new_todo_entry_button_duedate_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_new_todo_entry_description" />
+        <TextView
+            android:id="@+id/textview_new_todo_entry_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_todo_entry_text"
+            android:textSize="@dimen/textsize_new_todo_entry_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_new_todo_entry_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_new_todo_entry_submit_top"
-        android:onClick="onSubmitClickListener"
-        android:text="@string/new_todo_entry_button_submit_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_new_todo_entry_duedate" />
+        <EditText
+            android:id="@+id/edittext_new_todo_entry_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_new_todo_entry_title_top"
+            android:ems="10"
+            android:hint="@string/new_todo_entry_title_hint"
+            android:inputType="textPersonName"
+            android:text="@={viewModel.title}"
+            app:layout_constraintStart_toStartOf="@+id/textview_new_todo_entry_title"
+            app:layout_constraintTop_toBottomOf="@+id/textview_new_todo_entry_title" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/edittext_new_todo_entry_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_new_todo_entry_description_top"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/new_todo_entry_description_hint"
+            android:inputType="textMultiLine"
+            android:text="@={viewModel.description}"
+            app:layout_constraintStart_toStartOf="@+id/edittext_new_todo_entry_title"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_new_todo_entry_title" />
+
+        <Button
+            android:id="@+id/button_new_todo_entry_duedate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_new_todo_entry_duedate_button_top"
+            android:onClick="showDatePicker"
+            android:text="@string/new_todo_entry_button_duedate_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_new_todo_entry_description" />
+
+        <Button
+            android:id="@+id/button_new_todo_entry_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_new_todo_entry_submit_top"
+            android:onClick="onSubmitClickListener"
+            android:text="@string/new_todo_entry_button_submit_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_new_todo_entry_duedate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

@@ -1,4 +1,4 @@
-package com.linh.to_dolist
+package com.linh.to_dolist.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

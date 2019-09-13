@@ -1,4 +1,4 @@
-package com.linh.to_dolist
+package com.linh.to_dolist.main
 
 import android.app.Activity
 import android.content.Intent
@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
+import com.linh.to_dolist.R
+import com.linh.to_dolist.data.TodoEntry
+import com.linh.to_dolist.newtodoentry.NewTodoEntryActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
@@ -55,33 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCreateTodoEntryClickListener(view: View) {
         val intent = Intent(this, NewTodoEntryActivity::class.java)
-        startActivityForResult(intent, CREATE_ENTRY_REQUEST)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CREATE_ENTRY_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                data?.let {
-                    val title = it.getStringExtra(NewTodoEntryActivity.EXTRA_TODO_TITLE)
-                    val description = it.getStringExtra(NewTodoEntryActivity.EXTRA_TODO_DESCRIPTION)
-                    val dueDate = it.getSerializableExtra(NewTodoEntryActivity.EXTRA_TODO_DUEDATE)
-
-                    val entry = TodoEntry(
-                        title,
-                        description,
-                        dueDate as Calendar
-                    ) //TODO: Change to user defined date
-
-                    Log.d("onActivityResult", dueDate.toString())
-                    Log.d("onActivityResult", entry.toString())
-
-                    todoViewModel.insert(entry)
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(this, "Empty entry not added", Toast.LENGTH_SHORT).show()
-            }
-        }
+        startActivity(intent)
     }
 
     companion object {

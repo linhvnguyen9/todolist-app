@@ -1,4 +1,4 @@
-package com.linh.to_dolist
+package com.linh.to_dolist.main
 
 import android.content.Context
 import android.util.Log
@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.linh.to_dolist.R
+import com.linh.to_dolist.data.TodoEntry
 import kotlinx.android.synthetic.main.item_todo.view.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class TodoListAdapter(context: Context) : RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {

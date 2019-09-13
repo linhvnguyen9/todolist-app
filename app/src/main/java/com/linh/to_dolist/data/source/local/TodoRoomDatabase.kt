@@ -1,7 +1,8 @@
-package com.linh.to_dolist
+package com.linh.to_dolist.data.source.local
 
 import android.content.Context
 import androidx.room.*
+import com.linh.to_dolist.data.TodoEntry
 import java.util.*
 
 @Database(entities = [TodoEntry::class], version = 1)
