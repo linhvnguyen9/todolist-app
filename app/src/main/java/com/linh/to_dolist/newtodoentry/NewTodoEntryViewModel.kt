@@ -20,9 +20,10 @@ class NewTodoEntryViewModel(private val repository: TodoRepository) : ViewModel(
         val currentTitle = title.value
         val currentDescription = description.value
 
-        //TODO: Handle case when currentTitle and currentDescription is null
+        if (currentTitle == null || currentDescription == null)
+            return
 
-        createTodoEntry(TodoEntry(currentTitle!!, currentDescription!!, Calendar.getInstance())) //TODO: Implement calendar picker
+        createTodoEntry(TodoEntry(currentTitle, currentDescription, Calendar.getInstance())) //TODO: Implement calendar picker
     }
 
     private fun createTodoEntry(newTodoEntry: TodoEntry) = viewModelScope.launch(Dispatchers.IO) {
