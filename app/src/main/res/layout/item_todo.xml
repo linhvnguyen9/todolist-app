@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/margin_todo_card_layout"
-    android:padding="@dimen/padding_todo_card_layout"
-    app:cardCornerRadius="@dimen/radius_todo_card">
-    <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="java.util.Calendar"/>
+
+        <variable
+            name="entry"
+            type="com.linh.to_dolist.data.TodoEntry" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/margin_todo_card_layout"
+        android:padding="@dimen/padding_todo_card_layout"
+        app:cardCornerRadius="@dimen/radius_todo_card">
 
-        <TextView
-            android:id="@+id/todo_title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textsize_todo_card_title"
-            android:textStyle="bold"
-            tools:text="Todo title" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/todo_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Todo Description" />
+            <TextView
+                android:id="@+id/todo_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_todo_card_title"
+                android:textStyle="bold"
+                tools:text="Todo title"
+                android:text="@{entry.title}"/>
 
-        <TextView
-            android:id="@+id/todo_duedate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Todo duedate" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/todo_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Todo Description"
+                android:text="@{entry.description}"/>
+
+            <TextView
+                android:id="@+id/todo_duedate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Todo duedate"
+                android:text="@{@string/due_date_format(entry.dueDate.get(Calendar.DAY_OF_MONTH), (entry.dueDate.get(Calendar.MONTH) + 1), entry.dueDate.get(Calendar.YEAR))}"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -1,17 +1,13 @@
-package com.linh.to_dolist
+package com.linh.to_dolist.newtodoentry
 
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import java.time.MonthDay
+import com.linh.to_dolist.newtodoentry.NewTodoEntryActivity
 import java.util.*
 
 /**
