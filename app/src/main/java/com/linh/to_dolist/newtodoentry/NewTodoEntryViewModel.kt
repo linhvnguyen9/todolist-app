@@ -1,6 +1,5 @@
 package com.linh.to_dolist.newtodoentry
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,7 +23,13 @@ class NewTodoEntryViewModel(private val repository: TodoRepository) : ViewModel(
         if (currentTitle == null || currentDescription == null)
             return
 
-        createTodoEntry(TodoEntry(currentTitle, currentDescription, Calendar.getInstance())) //TODO: Implement calendar picker
+        createTodoEntry(
+            TodoEntry(
+                currentTitle,
+                currentDescription,
+                Calendar.getInstance()
+            )
+        ) //TODO: Implement calendar picker
     }
 
     private fun createTodoEntry(newTodoEntry: TodoEntry) = viewModelScope.launch(Dispatchers.IO) {
