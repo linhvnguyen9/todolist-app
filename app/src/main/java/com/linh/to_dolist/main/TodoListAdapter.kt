@@ -1,30 +1,27 @@
 package com.linh.to_dolist.main
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.linh.to_dolist.R
 import com.linh.to_dolist.data.TodoEntry
 import com.linh.to_dolist.databinding.ItemTodoBinding
-import kotlinx.android.synthetic.main.item_todo.view.*
-import java.util.*
 
-class TodoListAdapter(context: Context) : ListAdapter<TodoEntry, TodoListAdapter.TodoViewHolder>(TodoDiffCallback()) {
+class TodoListAdapter : ListAdapter<TodoEntry, TodoListAdapter.TodoViewHolder>(TodoDiffCallback()) {
+
     private val TAG = TodoListAdapter::class.java.simpleName
 
-    class TodoViewHolder private constructor(val binding: ItemTodoBinding) : RecyclerView.ViewHolder(binding.root) {
+    class TodoViewHolder private constructor(val binding: ItemTodoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: TodoEntry) {
             binding.entry = item
             binding.executePendingBindings()
         }
 
         companion object {
-            fun from(parent: ViewGroup): TodoViewHolder{
+            fun from(parent: ViewGroup): TodoViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemTodoBinding.inflate(layoutInflater, parent, false)
 

@@ -8,7 +8,6 @@ import com.linh.to_dolist.data.TodoEntry
 
 @Dao
 interface TodoDao {
-
     @Insert
     suspend fun insert(entry: TodoEntry)
 

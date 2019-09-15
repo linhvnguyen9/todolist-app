@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.linh.to_dolist.data.source.TodoRepository
 import com.linh.to_dolist.data.source.local.TodoRoomDatabase
+import com.linh.to_dolist.util.LogTool
 
 object ServiceLocator {
     private val TAG = ServiceLocator::class.java.simpleName
@@ -11,7 +12,7 @@ object ServiceLocator {
     var todoRepository: TodoRepository? = null
 
     fun getTodoRepository(context: Context): TodoRepository {
-        Log.d(TAG, "getTodoRepo: TodoRepo $todoRepository")
+        LogTool.logD(TAG, "getTodoRepo: TodoRepo $todoRepository")
         synchronized(this) {
             if (todoRepository == null) {
                 todoRepository = createTodoRepository(context)

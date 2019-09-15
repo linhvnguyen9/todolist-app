@@ -65,7 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_new_todo_entry_submit_top"
-            android:onClick="onSubmitClickListener"
             android:text="@string/new_todo_entry_button_submit_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
