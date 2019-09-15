@@ -5,45 +5,51 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.linh.to_dolist.R
 import com.linh.to_dolist.data.TodoEntry
+import com.linh.to_dolist.databinding.ItemTodoBinding
 import kotlinx.android.synthetic.main.item_todo.view.*
 import java.util.*
 
-class TodoListAdapter(context: Context) : RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
+class TodoListAdapter(context: Context) : ListAdapter<TodoEntry, TodoListAdapter.TodoViewHolder>(TodoDiffCallback()) {
     private val TAG = TodoListAdapter::class.java.simpleName
 
-    private val inflater = LayoutInflater.from(context)
-    private var todoEntries = emptyList<TodoEntry>()
+    class TodoViewHolder private constructor(val binding: ItemTodoBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: TodoEntry) {
+            binding.entry = item
+            binding.executePendingBindings()
+        }
 
-    class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title = itemView.todo_title
-        val description = itemView.todo_description
-        val dueDate = itemView.todo_duedate
+        companion object {
+            fun from(parent: ViewGroup): TodoViewHolder{
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemTodoBinding.inflate(layoutInflater, parent, false)
+
+                return TodoViewHolder(binding)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        val itemView = inflater.inflate(R.layout.item_todo, parent, false)
-
-        return TodoViewHolder(itemView)
+        return TodoViewHolder.from(parent)
     }
-
-    override fun getItemCount(): Int = todoEntries.size
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val currentEntry = todoEntries[position]
+        val item = getItem(position)
 
-        Log.d(TAG, currentEntry.toString())
+        holder.bind(item)
+    }
+}
 
-        holder.title.text = currentEntry.title
-        holder.description.text = currentEntry.description
-        val date = currentEntry.dueDate
-        holder.dueDate.text = "${date.get(Calendar.DAY_OF_MONTH)} ${date.get(Calendar.MONTH) + 1} ${date.get(Calendar.YEAR)}"
+class TodoDiffCallback : DiffUtil.ItemCallback<TodoEntry>() {
+    override fun areItemsTheSame(oldItem: TodoEntry, newItem: TodoEntry): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    internal fun setEntries(entry: List<TodoEntry>) {
-        this.todoEntries = entry
-        notifyDataSetChanged()
+    override fun areContentsTheSame(oldItem: TodoEntry, newItem: TodoEntry): Boolean {
+        return oldItem == newItem
     }
 }

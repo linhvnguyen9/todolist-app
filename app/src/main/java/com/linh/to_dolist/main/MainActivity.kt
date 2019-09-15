@@ -9,30 +9,38 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.linh.to_dolist.R
+import com.linh.to_dolist.TodoListApplication
+import com.linh.to_dolist.ViewModelFactory
 import com.linh.to_dolist.data.TodoEntry
+import com.linh.to_dolist.databinding.ActivityMainBinding
 import com.linh.to_dolist.newtodoentry.NewTodoEntryActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private val todoViewModel by lazy { ViewModelProvider(this).get(TodoViewModel::class.java) }
+    private val todoViewModel by lazy {
+        val repository = (applicationContext as TodoListApplication).todoRepository
+        ViewModelFactory(repository).create(TodoViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.lifecycleOwner = this
+        binding.viewmodel = todoViewModel
+
         setSupportActionBar(toolbar)
 
         val recyclerViewAdapter = TodoListAdapter(this)
         todo_recyclerview.adapter = recyclerViewAdapter
         todo_recyclerview.layoutManager = LinearLayoutManager(this)
-
-        todoViewModel.allTodoEntries.observe(this, androidx.lifecycle.Observer { entries ->
-            entries?.let { recyclerViewAdapter.setEntries(it) }
-        })
 
         fab.setOnClickListener { view ->
             onCreateTodoEntryClickListener(view)
@@ -64,4 +72,3 @@ class MainActivity : AppCompatActivity() {
         private const val CREATE_ENTRY_REQUEST = 1
     }
 }
-
