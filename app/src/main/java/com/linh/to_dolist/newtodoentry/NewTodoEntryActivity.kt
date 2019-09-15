@@ -11,6 +11,7 @@ import com.linh.to_dolist.R
 import com.linh.to_dolist.TodoListApplication
 import com.linh.to_dolist.ViewModelFactory
 import com.linh.to_dolist.databinding.ActivityNewTodoEntryBinding
+import com.linh.to_dolist.util.LogTool
 import java.util.*
 
 class NewTodoEntryActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class NewTodoEntryActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         findViewById<Button>(R.id.button_new_todo_entry_submit).setOnClickListener{
-            Log.d("todoentrysubmit", "Pressed button!")
+            LogTool.logD("todoentrysubmit", "Pressed button!")
             viewModel.saveTodoEntry()
             finish()
         }
