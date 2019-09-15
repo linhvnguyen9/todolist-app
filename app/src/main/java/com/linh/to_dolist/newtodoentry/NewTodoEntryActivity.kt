@@ -41,6 +41,6 @@ class NewTodoEntryActivity : AppCompatActivity() {
     }
 
     fun processDatePickerResult(year: Int, month: Int, day: Int) {
-        dueDate.set(year, month, day)
+        viewModel.dueDate.value?.set(year, month, day)
     }
 }

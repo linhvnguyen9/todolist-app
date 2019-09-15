@@ -1,5 +1,6 @@
 package com.linh.to_dolist.newtodoentry
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +16,8 @@ class NewTodoEntryViewModel(private val repository: TodoRepository) : ViewModel(
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
+    private val _dueDate = MutableLiveData<Calendar>().apply { value = Calendar.getInstance() }
+    val dueDate: LiveData<Calendar> = _dueDate
 
     fun saveTodoEntry() {
         val currentTitle = title.value
@@ -27,9 +30,9 @@ class NewTodoEntryViewModel(private val repository: TodoRepository) : ViewModel(
             TodoEntry(
                 currentTitle,
                 currentDescription,
-                Calendar.getInstance()
+                dueDate.value!!
             )
-        ) //TODO: Implement calendar picker
+        )
     }
 
     private fun createTodoEntry(newTodoEntry: TodoEntry) = viewModelScope.launch(Dispatchers.IO) {
