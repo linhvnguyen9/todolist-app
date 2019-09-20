@@ -1,10 +1,15 @@
 package com.linh.to_dolist
 
 import android.app.Application
-import com.linh.to_dolist.data.source.TodoRepository
-import com.linh.to_dolist.data.source.local.TodoRoomDatabase
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class TodoListApplication : Application() {
-    val todoRepository: TodoRepository
-        get() = ServiceLocator.getTodoRepository(this)
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(this@TodoListApplication)
+            modules(appModule)
+        }
+    }
 }
