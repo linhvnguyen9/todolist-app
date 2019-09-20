@@ -6,19 +6,15 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.linh.to_dolist.R
-import com.linh.to_dolist.TodoListApplication
-import com.linh.to_dolist.ViewModelFactory
 import com.linh.to_dolist.databinding.ActivityNewTodoEntryBinding
 import com.linh.to_dolist.util.LogTool
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 class NewTodoEntryActivity : AppCompatActivity() {
     private var dueDate = Calendar.getInstance()
 
-    private val viewModel by lazy {
-        val repository = (applicationContext as TodoListApplication).todoRepository
-        ViewModelFactory(repository).create(NewTodoEntryViewModel::class.java)
-    }
+    private val viewModel: NewTodoEntryViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

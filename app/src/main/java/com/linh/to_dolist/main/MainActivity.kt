@@ -8,18 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.linh.to_dolist.R
-import com.linh.to_dolist.TodoListApplication
-import com.linh.to_dolist.ViewModelFactory
 import com.linh.to_dolist.databinding.ActivityMainBinding
 import com.linh.to_dolist.newtodoentry.NewTodoEntryActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
-    private val todoViewModel by lazy {
-        val repository = (applicationContext as TodoListApplication).todoRepository
-        ViewModelFactory(repository).create(TodoViewModel::class.java)
-    }
+    private val todoViewModel: TodoViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
